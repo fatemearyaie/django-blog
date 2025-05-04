@@ -4,7 +4,7 @@ from .models import article
 # Create your views here.
 def home(request):
     context ={
-        "articles": article.objects.all()
+        "articles": article.objects.filter(status = 'P')
     }
     return render(request, "blog/home.html", context)  
 def api(request):
