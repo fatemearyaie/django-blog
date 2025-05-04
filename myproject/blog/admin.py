@@ -6,7 +6,7 @@ class articleadmin(admin.ModelAdmin):
     list_filter = ('publish', 'status')
     search_fields = ('title', 'slug')
     # generate slug field for every title automatically.
-    prepopulated_fields = {'slug':('title')}
+    prepopulated_fields = {'slug':['title']}
     ordering = ['status', 'publish']
 # Register your models here.
 admin.site.register(article, articleadmin)
