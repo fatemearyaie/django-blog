@@ -4,6 +4,7 @@ from .models import article
 class articleadmin(admin.ModelAdmin):
     list_display = ('title','slug','publish','status')
     list_filter = ('publish', 'status')
+    search_fields = ('title', 'slug')
 # Register your models here.
 admin.site.register(article, articleadmin)
 
