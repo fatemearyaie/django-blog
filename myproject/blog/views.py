@@ -10,3 +10,10 @@ def home(request):
     return render(request, "blog/home.html", context)  
 def api(request):
     return(JsonResponse({"title":"hi"}))
+
+def article_detail(request, slug):
+    context ={
+        "article": article.objects.get(slug = slug)
+        
+    }
+    return render(request, "blog/detail.html", context) 
