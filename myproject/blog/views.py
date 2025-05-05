@@ -13,7 +13,7 @@ def api(request):
 
 def article_detail(request, slug):
     context ={
-        "article": article.objects.get(slug = slug)
+        "article": article.objects.get(slug = slug) # first slug is for database's field and second is for the slug we pass
         
     }
     return render(request, "blog/detail.html", context) 
