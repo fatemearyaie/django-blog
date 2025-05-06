@@ -1,13 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from .models import article
+
+
+
 # Create your views here.
 def home(request):
-    context ={
-        "articles": article.objects.filter(status = 'P').order_by('-publish')
-        
-    }
-    return render(request, "blog/home.html", context)  
+    return render(request, "blog/home.html")  
 def api(request):
     return(JsonResponse({"title":"hi"}))
 
