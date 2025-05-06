@@ -1,10 +1,11 @@
 from django.urls import path
-from .views import home, api, article_detail
+from .views import home, article_detail, about, contact, sample
 
 app_name = 'blog'
 urlpatterns = [
     path('', home, name='home'),
-    path('api', api, name="api"),
     path('article/<slug:slug>',article_detail, name='detail'), # <type:name>
-
+    path('about/', about, name='about'),
+    path('contact/', contact, name='contact'),
+    path('post/', sample, name='post')
 ]
