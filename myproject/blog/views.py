@@ -6,13 +6,15 @@ from .models import article
 
 # Create your views here.
 def home(request):
-    return render(request, "blog/home.html")  
+    articles = article.objects.all()
+    return render(request, "blog/home.html", {"articles": articles}) 
 
-def article_detail(request, slug):
+def post(request, slug):
     context ={
         "article": article.objects.get(slug = slug) # first slug is for database's field and second is for the slug we pass
     }
-    return render(request, "blog/single.html", context) 
+    return render(request, "blog/post.html", context) 
+
 def about(request):
     return render(request, 'blog/about.html')
 
