@@ -16,7 +16,9 @@ class article(models.Model):
     upldated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
 
-
+    class Meta:
+        verbose_name = "مقاله"
+        verbose_names = "مقاله ها"
 
     def __str__(self):
         return self.title
