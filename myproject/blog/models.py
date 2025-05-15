@@ -18,7 +18,7 @@ class article(models.Model):
 
     class Meta:
         verbose_name = "مقاله"
-        verbose_names = "مقاله ها"
+        verbose_name_plural = "مقاله ها"
 
     def __str__(self):
         return self.title
