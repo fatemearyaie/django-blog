@@ -16,5 +16,7 @@ class article(models.Model):
     upldated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
 
+
+
     def __str__(self):
         return self.title

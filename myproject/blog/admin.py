@@ -8,6 +8,8 @@ class articleadmin(admin.ModelAdmin):
     # generate slug field for every title automatically.
     prepopulated_fields = {'slug':['title']}
     ordering = ['status', 'publish']
+
+    
 # Register your models here.
 admin.site.register(article, articleadmin)
 
