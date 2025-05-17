@@ -25,10 +25,8 @@ def jalaliConvertor(time):
             time_to_list[1] = month
             break
 
-    output = "{} {} {}، ساعت {}:{}".format(
+    output = "{} {} {}".format(
         time_to_list[2],
         time_to_list[1],
-        time_to_list[0],
-        time.hour,
-        time.minute)
+        time_to_list[0],)
     return output

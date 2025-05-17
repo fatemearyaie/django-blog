@@ -3,6 +3,21 @@ from django.utils import timezone
 from extensions.utils import jalaliConvertor
 
 # Create your models here.
+
+class category(models.Model):
+    title = models.CharField(max_length=50, verbose_name=" عنوان دسته بندی")
+    slug = models.SlugField(max_length=100, unique=True, verbose_name="اسلاگ")
+    status = models.BooleanField(default=True, verbose_name="آیا نمایش داده شود؟")
+    position = models.IntegerField(verbose_name='پوزیشن')
+
+    class Meta:
+        verbose_name = "دسته بندی"
+        verbose_name_plural = "دسته بندی ها"
+        ordering = ['position']
+
+    def __str__(self):
+        return self.title
+
 class article(models.Model):
     STATUS_CHOICES = (
         ('D', 'Draft'),
