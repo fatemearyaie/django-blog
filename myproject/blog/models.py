@@ -25,6 +25,7 @@ class article(models.Model):
     )
     title = models.CharField(max_length=50, verbose_name="عنوان")
     slug = models.SlugField(max_length=100, unique=True, verbose_name="اسلاگ") #اون بخشی از url که تغییر میکنه رو میگیم اسلاگ 
+    category = models.ManyToManyField(category, verbose_name="دسته بندی")
     description = models.TextField(verbose_name="توضیحات")
     thumbnail = models.ImageField(upload_to='images', verbose_name="عکس بندانگشتی")
     publish = models.DateTimeField(default=timezone.now, verbose_name="تاریخ انتشار")
