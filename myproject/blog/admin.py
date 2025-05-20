@@ -22,7 +22,7 @@ class articleadmin(admin.ModelAdmin):
     ordering = ['status', 'publish']
 
     def category_to_str(self, obj):
-        return "categories"
+        return "، ".join([category.title for category in obj.category.all()])
 
     
 # Register your models here.
