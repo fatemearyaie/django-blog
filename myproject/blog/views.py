@@ -7,7 +7,7 @@ from .models import article, category
 # Create your views here.
 def home(request):
     context = {
-        "articles" : article.objects.filter(status="p"),
+        "articles" : article.objects.filter(status="P"),
         "categories" : category.objects.filter(status = True)
                }
 
