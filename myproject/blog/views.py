@@ -1,13 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from .models import article
+from .models import article, category
 
 
 
 # Create your views here.
 def home(request):
-    articles = article.objects.all()
-    return render(request, "blog/home.html", {"articles": articles}) 
+    context = {
+        "articles" : article.objects.filter(status="p"),
+        "categories" : category.objects.filter(status = True)
+               }
+
+    return render(request, "blog/home.html", context) 
 
 def post(request, slug):
     articleone = article.objects.get(slug = slug) # first slug is for database's field and second is for the slug we pass
@@ -21,3 +25,4 @@ def contact(request):
 
 def sample(request):
     return render(request, 'blog/post.html')
+
