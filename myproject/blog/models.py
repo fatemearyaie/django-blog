@@ -44,3 +44,4 @@ class article(models.Model):
     
     def jpublish(self):
         return jalaliConvertor(self.publish)
+    

@@ -8,3 +8,7 @@ body{
     margin-left: initial !important;
     margin-right: auto;
 }
+
+.post-meta {
+  text-align: left;
+}
