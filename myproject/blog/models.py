@@ -7,7 +7,6 @@ from extensions.utils import jalaliConvertor
 class ArticleManager(models.Manager):
     def published(self):
         return self.filter(status = "P")
-    
 class CategoryManager(models.Manager):
     def CategoryStatus(self):
         return self.filter(status=True)
