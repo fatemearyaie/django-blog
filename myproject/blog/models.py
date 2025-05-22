@@ -10,8 +10,9 @@ class ArticleManager(models.Manager):
 class CategoryManager(models.Manager):
     def CategoryStatus(self):
         return self.filter(status=True)
-# Create your models here.
+    
 
+# Create your models here.
 class category(models.Model):
     title = models.CharField(max_length=50, verbose_name=" عنوان دسته بندی")
     slug = models.SlugField(max_length=100, unique=True, verbose_name="اسلاگ")
