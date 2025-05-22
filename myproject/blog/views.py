@@ -7,8 +7,8 @@ from .models import article, category
 # Create your views here.
 def home(request):
     context = {
-        "articles" : article.objects.filter(status="P"),
-        #"categories" : category.objects.filter(status = True)
+        "articles" : article.objects.published(),
+        "categories" : category.objects.CategoryStatus()
                }
 
     return render(request, "blog/home.html", context) 

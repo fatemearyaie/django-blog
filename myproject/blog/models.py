@@ -7,6 +7,10 @@ from extensions.utils import jalaliConvertor
 class ArticleManager(models.Manager):
     def published(self):
         return self.filter(status = "P")
+    
+class CategoryManager(models.Manager):
+    def CategoryStatus(self):
+        return self.filter(status=True)
 # Create your models here.
 
 class category(models.Model):
@@ -22,6 +26,7 @@ class category(models.Model):
 
     def __str__(self):
         return self.title
+    objects = CategoryManager()
 
 class article(models.Model):
     STATUS_CHOICES = (
