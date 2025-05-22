@@ -2,6 +2,11 @@ from django.db import models
 from django.utils import timezone
 from extensions.utils import jalaliConvertor
 
+
+# manager 
+class ArticleManager(models.Manager):
+    def published(self):
+        return self.filter(status = "P")
 # Create your models here.
 
 class category(models.Model):
@@ -36,12 +41,13 @@ class article(models.Model):
     class Meta:
         verbose_name = "مقاله"
         verbose_name_plural = "مقاله ها"
-        ordering = ['publish']
+        ordering = ['-publish']
     
 
     def __str__(self):
         return self.title
-    
     def jpublish(self):
         return jalaliConvertor(self.publish)
-    
+    def category_published(self):
+        return self.category.filter(status=True)
+    objects = ArticleManager()
