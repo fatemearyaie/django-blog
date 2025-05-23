@@ -56,3 +56,5 @@ class article(models.Model):
     def category_published(self):
         return self.category.filter(status=True)
     objects = ArticleManager()
+    def categorypublished(self):
+        return self.category.filter(status = True)
