@@ -26,3 +26,8 @@ def contact(request):
 def sample(request):
     return render(request, 'blog/post.html')
     
+def category(request, slug):
+    context = {
+        'category' : get_object_or_404(category, slug=slug, status = True),
+    }
+    return render(request, "blog/category.html", context) 

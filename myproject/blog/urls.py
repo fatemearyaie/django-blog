@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home, about, contact, sample, post
+from .views import home, about, contact, sample, post, category
 
 app_name = 'blog'
 urlpatterns = [
@@ -8,4 +8,5 @@ urlpatterns = [
     path('about/', about, name='about'),
     path('contact/', contact, name='contact'),
     path('post/', sample, name='post'),
+    path('category/<slug:slug>', category, name='category')
 ]
