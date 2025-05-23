@@ -1,40 +1,27 @@
 {% extends 'blog/base.html' %}
 {% load static %}
 {% block main %}
-
-<header class="masthead" style="background-image: url({% static 'assets/img/home-bg.jpg' %})">
-    <div class="container position-relative px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
-            <div class="col-md-10 col-lg-8 col-xl-7">
-                <div class="site-heading">
-                    <h1>Fateme</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-        <!-- Main Content-->
+<!-- Main Content-->
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
-
-
-                    {% for article in articles %}
+                    {% for article in category.article.published %}
                     <div class="post-preview">
                         <a href="{% url 'blog:post' article.slug %}">
-                            <h2 class="post-title">{{article.title}}</h2>
-                            <h3 class="post-subtitle">{{article.description|truncatewords:30}}</h3>
+                            <h2 class="post-title">
+                                {{article.title}}
+                            </h2>
+                            <h3 class="post-subtitle">
+                                {{article.description|truncatechars:30}}
+                            </h3>
                         </a>
                         <p class="post-meta">
                             {{article.jpublish}}
                         </p>
                         <div>
-                            {% for cat in article.category.all %}
-                            <a href="#">{{cat.title}}</a>
-                            {% endfor %}
+                            <a href="#"></a>
                         </div>
                     </div>
-                    {% endfor %}
 
                     <!-- Divider-->
                     <hr class="my-4" />

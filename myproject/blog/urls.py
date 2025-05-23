@@ -7,5 +7,5 @@ urlpatterns = [
     path('articles/<slug:slug>',post, name='post'), # <type:name>
     path('about/', about, name='about'),
     path('contact/', contact, name='contact'),
-    path('post/', sample, name='post')
+    path('post/', sample, name='post'),
 ]

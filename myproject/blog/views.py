@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from .models import article, category
 
@@ -25,4 +25,4 @@ def contact(request):
 
 def sample(request):
     return render(request, 'blog/post.html')
-
+    
