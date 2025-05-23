@@ -6,10 +6,9 @@ from django.core.paginator import Paginator
 
 
 # Create your views here.
-def home(request):
+def home(request, page=1):
     articles_list = article.objects.published()
     paginator = Paginator(articles_list, 4)
-    page = request.GET.get('page')
     articles = paginator.get_page(page)
     context = {
         "articles" : articles,
