@@ -7,9 +7,9 @@ from django.core.paginator import Paginator
 
 # Create your views here.
 def home(request, page=1):
-    articles_list = article.objects.published()
-    paginator = Paginator(articles_list, 4)
-    articles = paginator.get_page(page)
+    articles_list = article.objects.published() #this is all the articles with manager's condition
+    paginator = Paginator(articles_list, 4) # this get the list of articles and how many of them display in each page
+    articles = paginator.get_page(page) # show that articles that user requested ex:if user wants page2's articles it return the 4-8 articles
     context = {
         "articles" : articles,
         "categories" : category.objects.CategoryStatus()
