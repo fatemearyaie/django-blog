@@ -30,7 +30,7 @@
                         </p>
                         <div>
                             {% for cat in article.categorypublished.all %}
-                            <a href="{% url 'blog:category' cat.slug %}">{{cat.title}}</a>
+                            <a href="{% url 'blog:category' slug=cat.slug page=1 %}">{{cat.title}}</a>
                             {% endfor %}
                         </div>
                     </div>
