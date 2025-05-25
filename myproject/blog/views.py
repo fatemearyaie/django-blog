@@ -31,8 +31,13 @@ def contact(request):
 def sample(request):
     return render(request, 'blog/post.html')
     
-def category_view(request, slug):
+def category_view(request, slug, page=1):
+    categories = get_object_or_404(category, slug=slug, status = True)
+    articles_list = category.articles.published()
+    paginator = Paginator(articles_list, 4) # this get the list of articles and how many of them display in each page
+    articles = paginator.get_page(page) # show that articles that user requested ex:if user wants page2's articles it return the 4-8 articles
     context = {
-        'category' : get_object_or_404(category, slug=slug, status = True),
+        'category' : categories,
+        'articles' : articles
     }
     return render(request, "blog/category.html", context) 
