@@ -33,7 +33,7 @@ def sample(request):
     
 def category_view(request, slug, page=1):
     categories = get_object_or_404(category, slug=slug, status = True)
-    articles_list = category.articles.published()
+    articles_list = categories.articles.published()
     paginator = Paginator(articles_list, 4) # this get the list of articles and how many of them display in each page
     articles = paginator.get_page(page) # show that articles that user requested ex:if user wants page2's articles it return the 4-8 articles
     context = {
