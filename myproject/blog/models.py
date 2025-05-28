@@ -14,7 +14,7 @@ class CategoryManager(models.Manager):
 
 # Create your models here.
 class category(models.Model):
-    parent = models.ForeignKey('self', default=None, null=True, blank=True, on_delete=models.SET_NULL, related_name='children', verbose_name='عبارت زیر دسته')
+    parent = models.ForeignKey('self', default=None, null=True, blank=True, on_delete=models.SET_NULL, related_name='children', verbose_name='عبارت زیر دسته') #self points to category model
     title = models.CharField(max_length=50, verbose_name=" عنوان دسته بندی")
     slug = models.SlugField(max_length=100, unique=True, verbose_name="اسلاگ")
     status = models.BooleanField(default=True, verbose_name="آیا نمایش داده شود؟")
