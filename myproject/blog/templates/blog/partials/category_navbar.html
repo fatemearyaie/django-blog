@@ -1,16 +1,29 @@
-
 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                    </ul>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'blog:home' %}">خانه</a></li>
+  <ul class="navbar-nav ms-auto py-4 py-lg-0">
+    <li class="nav-item">
+      <a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'blog:home' %}">خانه</a>
+    </li>
 
-                    {% for cat in category %}
-                    
-                    {% if cat.parent == None %}
-                    <li class="nav-item">
-                    <a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'blog:category' slug=cat.slug page=1 %}">{{cat.title}}</a>
+    {% for cat in category %}
+      {% if cat.parent == None %}
+        <li class="nav-item dropdown">
+          <a class="nav-link px-lg-3 py-3 py-lg-4 dropdown-toggle" href="{% url 'blog:category' slug=cat.slug page=1 %}" data-bs-toggle="dropdown">
+            {{ cat.title }}
+          </a>
+
+          {% if cat.children.all %}
+              <!--it means if my category has child -->
+            <ul class="dropdown-menu">
+              {% for child in cat.children.all %}
+                <li>
+                  <a class="dropdown-item" href="{% url 'blog:category' slug=child.slug page=1 %}">{{ child.title }}</a>
                 </li>
-                {% endif %}
-                    {% endfor %}
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
 
-                </div>
