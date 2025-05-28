@@ -1,3 +1,7 @@
+{% load static %}
+<link href="{% static 'css/navstyle.css' %}" rel="stylesheet" />
+
+
 <div class="collapse navbar-collapse" id="navbarResponsive">
   <ul class="navbar-nav ms-auto py-4 py-lg-0">
     <li class="nav-item">
@@ -12,18 +16,22 @@
           </a>
 
           {% if cat.children.all %}
-              <!--it means if my category has child -->
-            <ul class="dropdown-menu">
-              {% for child in cat.children.all %}
-                <li>
-                  <a class="dropdown-item" href="{% url 'blog:category' slug=child.slug page=1 %}">{{ child.title }}</a>
-                </li>
-              {% endfor %}
-            </ul>
+          <ul class="dropdown-menu">
+            {% for child in cat.children.all %}
+              <li class="dropdown-submenu">
+                <a class="dropdown-item dropdown-toggle" href="{% url 'blog:category' slug=child.slug page=1 %}">
+                  {{ child.title }}
+                </a>
+
+                {% if child.children.all.exists %}
+                  {% include 'blog/partials/category_loop.html' with category=child %}
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
           {% endif %}
         </li>
       {% endif %}
     {% endfor %}
   </ul>
 </div>
-
