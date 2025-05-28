@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import article, category
 
 class categoryadmin(admin.ModelAdmin):
-    list_display = ('title','slug','status', 'position', 'parent')
+    list_display = ('position','title','slug','status', 'parent')
     list_filter = [('status')]
     search_fields = ('title', 'slug')
     # generate slug field for every title automatically.
