@@ -41,12 +41,12 @@
                     <!-- Divider-->
                     <hr class="my-4" />
                     <div class="d-flex justify-content-between mb-4">
-    {% if articles.has_previous %}
-        <a class="btn btn-primary text-uppercase" href="{% url 'blog:home' articles.previous_page_number %}">← پست‌های جدیدتر</a>
+    {% if page_obj.has_previous %}
+        <a class="btn btn-primary text-uppercase" href="{% url 'blog:home' page_obj.previous_page_number %}">← پست‌های جدیدتر</a>
     {% endif %}
 
-    {% if articles.has_next %}
-        <a class="btn btn-primary text-uppercase" href="{% url 'blog:home' articles.next_page_number %}">پست‌های قدیمی‌تر →</a>
+    {% if page_obj.has_next %}
+        <a class="btn btn-primary text-uppercase" href="{% url 'blog:home' page_obj.next_page_number %}">پست‌های قدیمی‌تر →</a>
     {% endif %}
 </div>
 
