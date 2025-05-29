@@ -40,6 +40,8 @@ def sample(request):
 """
 
 class CategoryList(ListView):
+    paginate_by = 4
+    template_name = 'blog/category_list.html'
     def get_queryset(self):
         slug = self.kwargs.get('slug')
         category = get_object_or_404(category.objects.CategoryStatus(), slug=slug)
