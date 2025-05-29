@@ -40,6 +40,7 @@
                     <hr class="my-4" />
                     <!-- Divider-->
                     <hr class="my-4" />
+                    {% if is_paginated %}
                     <div class="d-flex justify-content-between mb-4">
     {% if page_obj.has_previous %}
         <a class="btn btn-primary text-uppercase" href="{% url 'blog:home' page_obj.previous_page_number %}">← پست‌های جدیدتر</a>
@@ -49,7 +50,7 @@
         <a class="btn btn-primary text-uppercase" href="{% url 'blog:home' page_obj.next_page_number %}">پست‌های قدیمی‌تر →</a>
     {% endif %}
 </div>
-
+{% endif %}
                 </div>
             </div>
         </div>
