@@ -11,10 +11,13 @@ class ArticleList(ListView):
     context_object_name = 'articles'
     queryset = article.objects.published()
     paginate_by = 4
+
 class ArticleDetail(DetailView):
     def get_object(self):
         slug = self.kwargs.get('slug')
         return get_object_or_404(article.objects.published(), slug = slug)
+    
+
 def about(request):
     return render(request, 'blog/about.html')
 
@@ -24,7 +27,7 @@ def contact(request):
 def sample(request):
     return render(request, 'blog/post.html')
     
-def category_view(request, slug, page=1):
+"""def category_view(request, slug, page=1):
     categories = get_object_or_404(category, slug=slug, status = True)
     articles_list = categories.articles.published()
     paginator = Paginator(articles_list, 4) # this get the list of articles and how many of them display in each page
@@ -34,3 +37,10 @@ def category_view(request, slug, page=1):
         'articles' : articles
     }
     return render(request, "blog/category.html", context) 
+"""
+
+class CategoryList(ListView):
+    def get_queryset(self):
+        slug = self.kwargs.get('slug')
+        category = get_object_or_404(category.objects.CategoryStatus(), slug=slug)
+        return category.articles.published()
