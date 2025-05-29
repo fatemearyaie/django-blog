@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from .models import article, category
 from django.core.paginator import Paginator
-from django.views.generic.list import ListView
+from django.views.generic import ListView, DetailView
 
 
 
@@ -11,11 +11,15 @@ class ArticleList(ListView):
     context_object_name = 'articles'
     queryset = article.objects.published()
     paginate_by = 4
+class ArticleDetail(DetailView):
+    def get_object(self):
+        slug = self.kwargs.get('slug')
+        return get_object_or_404(article.objects.published(), slug = slug)
 
-def post(request, slug):
+"""def post(request, slug):
     articleone = article.objects.get(slug = slug) # first slug is for database's field and second is for the slug we pass
     return render(request, "blog/post.html", {"article": articleone}) 
-
+"""
 def about(request):
     return render(request, 'blog/about.html')
 
