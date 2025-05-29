@@ -14,15 +14,15 @@
           <a class="nav-link px-lg-3 py-3 py-lg-4 dropdown-toggle" href="{% url 'blog:category' slug=cat.slug page=1 %}" data-bs-toggle="dropdown">
             {{ cat.title }} <!--show that category's title-->
           </a>
-          {% if cat.children.all %} <!--check if the category we selected has any sub-category -->
+          {% if cat.children.CategoryStatus %} <!--check if the category we selected has any sub-category -->
           <ul class="dropdown-menu">
-            {% for child in cat.children.all %} <!--for each sub-category of the category we seletcted do these -->
+            {% for child in cat.children.CategoryStatus %} <!--for each sub-category of the category we seletcted do these -->
               <li class="dropdown-submenu">
                 <a class="dropdown-item dropdown-toggle" href="{% url 'blog:category' slug=child.slug page=1 %}">
                   {{ child.title }}
                 </a>
 
-                {% if child.children.all.exists %} <!--check if the sub-category has any child(sub)? -->
+                {% if child.children.CategoryStatus %} <!--check if the sub-category has any child(sub)? -->
                   {% include 'blog/partials/category_loop.html' with category=child %}<!--if yes go to this address-->
                 {% endif %}
               </li>
