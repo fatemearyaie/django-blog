@@ -22,6 +22,7 @@ from django.views.generic.list import ListView
 class ArticleList(ListView):
     """model = article
     template_name = "blog/home.html" """
+    context_object_name = 'articles'
     queryset = article.objects.published()
     paginated_by = 4
 
