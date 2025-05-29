@@ -24,7 +24,7 @@ class ArticleList(ListView):
     template_name = "blog/home.html" """
     context_object_name = 'articles'
     queryset = article.objects.published()
-    paginated_by = 4
+    paginate_by = 4
 
 def post(request, slug):
     articleone = article.objects.get(slug = slug) # first slug is for database's field and second is for the slug we pass
