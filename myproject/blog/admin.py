@@ -1,6 +1,11 @@
 from django.contrib import admin
 from .models import article, category
 
+def make_published(modeladmin, requuest, queryset):
+    queryset.update(status='P')
+make_published.short_description = "انتشار مقالات انتخاب شده"
+
+
 class categoryadmin(admin.ModelAdmin):
     list_display = ('position','title','slug','status', 'parent')
     list_filter = [('status')]
@@ -20,7 +25,7 @@ class articleadmin(admin.ModelAdmin):
     # generate slug field for every title automatically.
     prepopulated_fields = {'slug':['title']}
     ordering = ['status', 'publish']
-
+    actions = [make_published]
     def category_to_str(self, obj):
         return "، ".join([category.title for category in obj.category.all()])
 
