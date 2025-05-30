@@ -1,11 +1,16 @@
 from django.contrib import admin
 from .models import article, category
 
-def make_published(modeladmin, requuest, queryset):
-    queryset.update(status='P')
+def make_published(modeladmin, request, queryset):
+    row_update = queryset.update(status='P')
+    if row_update == 1:
+        message_bit = 'مقاله آپدیت شد'
+    else:
+        message_bit = ("منتشر شدند")
+    modeladmin.message_user(request, "{} مقاله آپدیت شدند".format(row_update))
 make_published.short_description = "انتشار مقالات انتخاب شده"
 
-def make_draft(modeladmin, requuest, queryset):
+def make_draft(modeladmin, request, queryset):
     queryset.update(status='D')
 make_draft.short_description = "پیش نویس مقالات انتخاب شده"
 
