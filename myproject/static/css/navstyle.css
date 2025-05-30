@@ -1,0 +1,18 @@
+/* پنهان کردن زیرمنو به صورت پیش‌فرض */
+.dropdown-submenu .dropdown-menu {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  margin-top: 0;
+}
+
+/* نمایش زیرمنو در حالت hover */
+.dropdown-submenu:hover > .dropdown-menu {
+  display: block;
+}
+
+/* رفع مشکل موقعیت زیرمنو */
+.dropdown-submenu {
+  position: relative;
+}
