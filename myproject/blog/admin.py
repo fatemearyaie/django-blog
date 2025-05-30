@@ -10,11 +10,20 @@ def StatusTrue(modeladmin, request, queryset):
     modeladmin.message_user(request, message_bit)
 StatusTrue.short_description = "نمایش کتگوری های انتخاب شده"
 
+def StatusFalse(modeladmin, request, queryset):
+    row_update = queryset.update(status=False)
+    if row_update == 1:
+        message_bit = "۱ پنهان داده شد"
+    else:
+        message_bit = f"{row_update} کتگوری پنهان شدند"
+    modeladmin.message_user(request, message_bit)
+StatusFalse.short_description = "پنهان کردن کتگوری های انتخاب شده"
+
 class categoryadmin(admin.ModelAdmin):
     list_display = ('position','title','slug','status', 'parent')
     list_filter = [('status')]
     search_fields = ('title', 'slug')
-    actions = [StatusTrue]
+    actions = [StatusTrue, StatusFalse]
     # generate slug field for every title automatically.
     prepopulated_fields = {'slug':['title']}
 
