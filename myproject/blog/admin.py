@@ -11,7 +11,12 @@ def make_published(modeladmin, request, queryset):
 make_published.short_description = "انتشار مقالات انتخاب شده"
 
 def make_draft(modeladmin, request, queryset):
-    queryset.update(status='D')
+    row_update = queryset.update(status='D')
+    if row_update == 1:
+        message_bit = 'مقاله پیش نویس شد'
+    else:
+        message_bit = ("پیش نویس شدند")
+    modeladmin.message_user(request, "{} مقاله پیش نویس شدند".format(row_update))
 make_draft.short_description = "پیش نویس مقالات انتخاب شده"
 
 
