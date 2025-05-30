@@ -5,6 +5,10 @@ def make_published(modeladmin, requuest, queryset):
     queryset.update(status='P')
 make_published.short_description = "انتشار مقالات انتخاب شده"
 
+def make_draft(modeladmin, requuest, queryset):
+    queryset.update(status='D')
+make_draft.short_description = "پیش نویس مقالات انتخاب شده"
+
 
 class categoryadmin(admin.ModelAdmin):
     list_display = ('position','title','slug','status', 'parent')
@@ -25,7 +29,7 @@ class articleadmin(admin.ModelAdmin):
     # generate slug field for every title automatically.
     prepopulated_fields = {'slug':['title']}
     ordering = ['status', 'publish']
-    actions = [make_published]
+    actions = [make_published, make_draft]
     def category_to_str(self, obj):
         return "، ".join([category.title for category in obj.category.all()])
 
