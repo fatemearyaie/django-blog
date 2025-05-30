@@ -1,36 +1,43 @@
 from django.contrib import admin
 from .models import article, category
-
-def make_published(modeladmin, request, queryset):
-    row_update = queryset.update(status='P')
+# CATEGORY
+def StatusTrue(modeladmin, request, queryset):
+    row_update = queryset.update(status=True)
     if row_update == 1:
-        message_bit = 'مقاله آپدیت شد'
+        message_bit = "۱ نمایش داده شد"
     else:
-        message_bit = ("منتشر شدند")
-    modeladmin.message_user(request, "{} مقاله آپدیت شدند".format(row_update))
-make_published.short_description = "انتشار مقالات انتخاب شده"
-
-def make_draft(modeladmin, request, queryset):
-    row_update = queryset.update(status='D')
-    if row_update == 1:
-        message_bit = 'مقاله پیش نویس شد'
-    else:
-        message_bit = ("پیش نویس شدند")
-    modeladmin.message_user(request, "{} مقاله پیش نویس شدند".format(row_update))
-make_draft.short_description = "پیش نویس مقالات انتخاب شده"
-
+        message_bit = f"{row_update} کتگوری نمایش داده شدند"
+    modeladmin.message_user(request, message_bit)
+StatusTrue.short_description = "نمایش کتگوری های انتخاب شده"
 
 class categoryadmin(admin.ModelAdmin):
     list_display = ('position','title','slug','status', 'parent')
     list_filter = [('status')]
     search_fields = ('title', 'slug')
+    actions = [StatusTrue]
     # generate slug field for every title automatically.
     prepopulated_fields = {'slug':['title']}
 
-    
-# Register your models here.
 admin.site.register(category, categoryadmin)
 
+# ARTICLE
+def make_published(modeladmin, request, queryset):
+    row_update = queryset.update(status='P')
+    if row_update == 1:
+        message_bit = "۱ مقاله منتشر شد"
+    else:
+        message_bit = f"{row_update} مقاله منتشر شدند"
+    modeladmin.message_user(request, message_bit)
+make_published.short_description = "انتشار مقالات انتخاب شده"
+
+def make_draft(modeladmin, request, queryset):
+    row_update = queryset.update(status='D')
+    if row_update == 1:
+        message_bit = "۱ مقاله پیش‌نویس شد"
+    else:
+        message_bit = f"{row_update} مقاله پیش‌نویس شدند"
+    modeladmin.message_user(request, message_bit)
+make_draft.short_description = "پیش‌نویس مقالات انتخاب شده"
 
 class articleadmin(admin.ModelAdmin):
     list_display = ('title','slug','jpublish','status', 'category_to_str')
@@ -42,12 +49,5 @@ class articleadmin(admin.ModelAdmin):
     actions = [make_published, make_draft]
     def category_to_str(self, obj):
         return "، ".join([category.title for category in obj.category.all()])
-
     
-# Register your models here.
 admin.site.register(article, articleadmin)
-
-    
-
-
-    
