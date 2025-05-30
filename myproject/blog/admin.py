@@ -54,7 +54,7 @@ class articleadmin(admin.ModelAdmin):
     search_fields = ('title', 'slug')
     # generate slug field for every title automatically.
     prepopulated_fields = {'slug':['title']}
-    ordering = ['status', 'publish']
+    ordering = ['status', '-publish']
     actions = [make_published, make_draft]
     def category_to_str(self, obj):
         return "، ".join([category.title for category in obj.category.all()])

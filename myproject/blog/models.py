@@ -48,7 +48,7 @@ class article(models.Model):
     class Meta:
         verbose_name = "مقاله"
         verbose_name_plural = "مقاله ها"
-        ordering = ['-publish']
+        ordering = ['publish']
     
 
     def __str__(self):
