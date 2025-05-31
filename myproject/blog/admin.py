@@ -29,6 +29,7 @@ class categoryadmin(admin.ModelAdmin):
 
 admin.site.register(category, categoryadmin)
 
+
 # ARTICLE
 def make_published(modeladmin, request, queryset):
     row_update = queryset.update(status='P')
@@ -49,7 +50,7 @@ def make_draft(modeladmin, request, queryset):
 make_draft.short_description = "پیش‌نویس مقالات انتخاب شده"
 
 class articleadmin(admin.ModelAdmin):
-    list_display = ('title','thumbnail_tag','slug','jpublish','status', 'category_to_str')
+    list_display = ('title','thumbnail_tag','author','slug','jpublish','status', 'category_to_str')
     list_filter = ('publish', 'status')
     search_fields = ('title', 'slug')
     # generate slug field for every title automatically.

@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from .models import article, category
 from django.core.paginator import Paginator
 from django.views.generic import ListView, DetailView
-
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -27,18 +27,6 @@ def contact(request):
 def sample(request):
     return render(request, 'blog/post.html')
     
-"""def category_view(request, slug, page=1):
-    categories = get_object_or_404(category, slug=slug, status = True)
-    articles_list = categories.articles.published()
-    paginator = Paginator(articles_list, 4) # this get the list of articles and how many of them display in each page
-    articles = paginator.get_page(page) # show that articles that user requested ex:if user wants page2's articles it return the 4-8 articles
-    context = {
-        'category' : categories,
-        'articles' : articles
-    }
-    return render(request, "blog/category.html", context) 
-"""
-
 class CategoryList(ListView):
     paginate_by = 4
     template_name = 'blog/category_list.html'
@@ -51,4 +39,17 @@ class CategoryList(ListView):
         slug = self.kwargs.get('slug')
         context = super().get_context_data(**kwargs)
         context['category'] = category
+        return context
+    
+class AuthorList(ListView):
+    paginate_by = 4
+    template_name = 'blog/article_list.html'
+    def get_queryset(self):
+        global author
+        slug = self.kwargs.get('username')
+        self.author = get_object_or_404(User, username=slug)
+        return self.author.articles.published()
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['author'] = self.author
         return context

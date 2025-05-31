@@ -25,6 +25,9 @@
                             <h2 class="post-title">{{article.title}}</h2>
                             <h3 class="post-subtitle">{{article.description|truncatewords:30}}</h3>
                         </a>
+<p class="post-meta">
+                        {{article.author.username}}
+                        </p>
                         <p class="post-meta">
                             {{article.jpublish}}
                         </p>
