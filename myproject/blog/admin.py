@@ -51,8 +51,8 @@ make_draft.short_description = "پیش‌نویس مقالات انتخاب شد
 
 class articleadmin(admin.ModelAdmin):
     list_display = ('title','thumbnail_tag','author','slug','jpublish','status', 'category_to_str')
-    list_filter = ('publish', 'status')
-    search_fields = ('title', 'slug')
+    list_filter = ('publish', 'status', 'author')
+    search_fields = ('title', 'slug', 'author')
     # generate slug field for every title automatically.
     prepopulated_fields = {'slug':['title']}
     ordering = ['status', '-publish']
