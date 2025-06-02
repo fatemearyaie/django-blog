@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import about, contact, sample, ArticleList, ArticleDetail, CategoryList,AuthorList,login
+from .views import about, contact, sample, ArticleList, ArticleDetail, CategoryList,AuthorList,login, paneladmin
 
 app_name = 'blog'
 urlpatterns = [
@@ -12,5 +12,6 @@ urlpatterns = [
     path('category/<slug:slug>/page/<int:page>', CategoryList.as_view(), name='category'),
     path('author/<slug:username>/page/<int:page>', AuthorList.as_view(), name='author'),
     path('account/login/', login, name='login'),
+    path('account/',paneladmin, name='homepanel' )
 
 ]

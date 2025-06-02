@@ -21,6 +21,8 @@ class ArticleDetail(DetailView):
 def about(request):
     return render(request, 'blog/about.html')
 
+def paneladmin(request):
+    return render(request, 'registeration/home.html')
 
 def contact(request):
     return render(request, 'blog/contact.html')
