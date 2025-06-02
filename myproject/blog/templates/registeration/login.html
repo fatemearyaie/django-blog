@@ -1,4 +1,5 @@
 {% load static %}
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,6 +34,14 @@
 <body>
 	
 	<div class="limiter">
+		{% if form.non_field_errors %}
+			<div class="errors">
+				{% for error in form.non_field_errors %}
+				<span>{{error}}</span>
+				{% endfor %}
+			</div>
+			{% endif %}
+
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100">
 				<form class="login100-form validate-form">{% csrf_token %}
@@ -43,16 +52,23 @@
 					<span class="login100-form-title p-b-34 p-t-27">
 						 ورود به سایت
 					</span>
+{% if form.non_field_errors %}
+	<div class="errors" style="color: red; text-align: center; padding-bottom: 10px;">
+		{% for error in form.non_field_errors %}
+			<span>{{ error }}</span><br>
+		{% endfor %}
+	</div>
+{% endif %}
 
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
 						<input class="input100" type="text" name="username" placeholder="نام کاربری">
-						{{form.username}}
+						{{form.username|add_class:"input100"}}
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
 						<input class="input100" type="password" name="pass" placeholder="رمز عبور">
-						{{form.password}}
+						{{form.password|add_class:"input100"}}
 						<span class="focus-input100"></span>
 					</div>
 
