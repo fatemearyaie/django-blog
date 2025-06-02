@@ -26,6 +26,9 @@ def contact(request):
 
 def sample(request):
     return render(request, 'blog/post.html')
+
+def login(request):
+    return render(request, 'registeration/login.html')
     
 class CategoryList(ListView):
     paginate_by = 4
@@ -53,3 +56,4 @@ class AuthorList(ListView):
         context = super().get_context_data(**kwargs)
         context['author'] = self.author
         return context
+    
