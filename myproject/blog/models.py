@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 class ArticleManager(models.Manager):
     def published(self):
         return self.filter(status = "P")
+    
 class CategoryManager(models.Manager):
     def CategoryStatus(self):
         return self.filter(status=True)
@@ -21,7 +22,8 @@ class category(models.Model):
     slug = models.SlugField(max_length=100, unique=True, verbose_name="اسلاگ")
     status = models.BooleanField(default=True, verbose_name="آیا نمایش داده شود؟")
     position = models.IntegerField(verbose_name='پوزیشن')
-
+    
+    objects = CategoryManager()
     class Meta:
         verbose_name = "دسته بندی"
         verbose_name_plural = "دسته بندی ها"
@@ -29,7 +31,7 @@ class category(models.Model):
 
     def __str__(self):
         return self.title
-    objects = CategoryManager()
+    
 
 class article(models.Model):
     STATUS_CHOICES = (
@@ -46,6 +48,7 @@ class article(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ساخت")
     updated = models.DateTimeField(auto_now=True, verbose_name="تاریخ آپدیت")
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, verbose_name="وضعیت")
+    objects = ArticleManager()
 
 
     class Meta:
@@ -60,7 +63,6 @@ class article(models.Model):
         return jalaliConvertor(self.publish)
     def category_published(self):
         return self.category.filter(status=True)
-    objects = ArticleManager()
     def categorypublished(self):
         return self.category.filter(status = True)
     def thumbnail_tag(self):

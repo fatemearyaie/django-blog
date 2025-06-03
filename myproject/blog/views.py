@@ -33,6 +33,11 @@ def sample(request):
 def login(request):
     return render(request, 'registeration/login.html')
     
+def ArticlesAdminPanel(request):
+    articles = article.objects.filter(status = 'P')
+    return render(request,'registeration/home.html' ,{'articles':articles})
+
+
 class CategoryList(ListView):
     paginate_by = 4
     template_name = 'blog/category_list.html'
