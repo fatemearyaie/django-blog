@@ -22,7 +22,7 @@ class category(models.Model):
     slug = models.SlugField(max_length=100, unique=True, verbose_name="اسلاگ")
     status = models.BooleanField(default=True, verbose_name="آیا نمایش داده شود؟")
     position = models.IntegerField(verbose_name='پوزیشن')
-    
+
     objects = CategoryManager()
     class Meta:
         verbose_name = "دسته بندی"
@@ -67,3 +67,5 @@ class article(models.Model):
         return self.category.filter(status = True)
     def thumbnail_tag(self):
         return format_html("<img width=100 src='{}'>".format(self.thumbnail.url))
+    def category_to_str(self):
+        return "، ".join([category.title for category in self.category.all()])

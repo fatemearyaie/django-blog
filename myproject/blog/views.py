@@ -34,7 +34,7 @@ def login(request):
     return render(request, 'registeration/login.html')
     
 def ArticlesAdminPanel(request):
-    articles = article.objects.filter(status = 'P')
+    articles = article.objects.all()
     return render(request,'registeration/home.html' ,{'articles':articles})
 
 
