@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'extensions',
     'widget_tweaks',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

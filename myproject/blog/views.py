@@ -30,9 +30,7 @@ def contact(request):
 def sample(request):
     return render(request, 'blog/post.html')
 
-def login(request):
-    return render(request, 'registeration/login.html')
-    
+
 class ArticleListAdmin(LoginRequiredMixin, ListView):
     template_name = 'registeration/home.html'
     def get_queryset(self):
