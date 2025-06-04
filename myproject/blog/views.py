@@ -4,7 +4,7 @@ from .models import article, category
 from django.core.paginator import Paginator
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.models import User
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 class ArticleList(ListView):
@@ -33,10 +33,13 @@ def sample(request):
 def login(request):
     return render(request, 'registeration/login.html')
     
-def ArticlesAdminPanel(request):
-    articles = article.objects.all()
-    return render(request,'registeration/home.html' ,{'articles':articles})
-
+class ArticleListAdmin(LoginRequiredMixin, ListView):
+    template_name = 'registeration/home.html'
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            article.objects.all()
+        else:
+            article.objects.filter(author=self.request.user) #if the author is that specific user who logged in
 
 class CategoryList(ListView):
     paginate_by = 4

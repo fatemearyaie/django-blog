@@ -44,7 +44,7 @@
 
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form">{% csrf_token %}
+				<form class="login100-form validate-form"  method="post" action="{% url 'login' %}" >{% csrf_token %}
 					<span class="login100-form-logo">
 						<i class="zmdi zmdi-landscape"></i>
 					</span>
