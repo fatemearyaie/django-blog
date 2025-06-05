@@ -3,6 +3,7 @@ from django.utils import timezone
 from extensions.utils import jalaliConvertor
 from django.utils.html import format_html
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 # manager 
@@ -69,3 +70,6 @@ class article(models.Model):
         return format_html("<img width=100 src='{}'>".format(self.thumbnail.url))
     def category_to_str(self):
         return "، ".join([category.title for category in self.category.all()])
+    def get_absolute_url(self):
+        return reverse("account/profile")
+    
