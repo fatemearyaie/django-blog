@@ -34,11 +34,13 @@ def sample(request):
 
 class ArticleListAdmin(LoginRequiredMixin, ListView):
     template_name = 'registeration/home.html'
+    model = article
+    context_object_name = 'articles'
     def get_queryset(self):
         if self.request.user.is_superuser:
-            article.objects.all()
+            return article.objects.all()
         else:
-            article.objects.filter(author=self.request.user) #if the author is that specific user who logged in
+            return article.objects.filter(author=self.request.user) #if the author is that specific user who logged in
 
 class CategoryList(ListView):
     paginate_by = 4
