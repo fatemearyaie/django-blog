@@ -5,7 +5,17 @@ from django.core.paginator import Paginator
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView
+from django.urls import reverse_lazy
 
+
+class CostumLoginView(LoginView):
+    template_name = 'registeration/login.html'
+    def get_success_url(self):
+        if self.user.is_superuser:
+            return reverse_lazy('registeration/home.html')
+        else:
+            return reverse_lazy('blog/article_list.html')
 # Create your views here.
 class ArticleList(ListView):
     context_object_name = 'articles'
