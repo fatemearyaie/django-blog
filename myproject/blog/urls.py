@@ -13,6 +13,6 @@ urlpatterns = [
     path('category/<slug:slug>/page/<int:page>', CategoryList.as_view(), name='category'),
     path('author/<slug:username>/page/<int:page>', AuthorList.as_view(), name='author'),
     path('account/login/', LoginView.as_view(template_name = 'registeration/login.html'),name='login'),
-    path('account/',paneladmin, name='homepanel'),
+    path('accounts/profile/',paneladmin, name='profile'),
     path('account/list/', ArticleListAdmin.as_view(), name='articlelist')
 ]
