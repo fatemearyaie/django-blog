@@ -6,5 +6,8 @@
 
 
 {% block main %}
-{{ form }}
+<form method="POST"> {% csrf_token %}
+{{ form.as_p }}
+<button class="btn btn-success">ارسال مقاله</button>
+</form>
 {% endblock %}
