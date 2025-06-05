@@ -2,10 +2,9 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from .models import article, category
 from django.core.paginator import Paginator
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import LoginView
 
 # Create your views here.
 class ArticleList(ListView):
@@ -69,3 +68,7 @@ class AuthorList(ListView):
         context['author'] = self.author
         return context
     
+class ArticleCreate(LoginRequiredMixin, CreateView):
+    model = article
+    fields = ['title', 'author', 'slug', 'category', 'description', 'thumbnail', 'publish', 'status']
+    template_name = 'registeration/article-create-update.html'
