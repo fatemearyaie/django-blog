@@ -9,7 +9,7 @@ from django.conf import settings
 
 class User(AbstractUser):
     is_author = models.BooleanField(default=False, verbose_name='وضعیت نویسندگی')
-    special_user = models.DateTimeField(default=timezone.now, verbose_name="کاربر ویژه تا: ")
+    special_user = models.DateTimeField(default=timezone.now, verbose_name=" ویژه تا: ")
 
     def is_special_user(self):
         if self.special_user > timezone.now():
