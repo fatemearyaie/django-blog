@@ -3,12 +3,19 @@ from django.utils import timezone
 from extensions.utils import jalaliConvertor
 from django.utils.html import format_html
 from django.contrib.auth.models import User
-from django.urls import revers
-from django.contrib.auth.models import AbstractBaseUser
+from django.urls import reverse
+from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 
-class User(AbstractBaseUser):
-    pass
+class User(AbstractUser):
+    is_author = models.BooleanField(default=False, verbose_name='وضعیت نویسندگی')
+    special_user = models.DateTimeField(default=timezone.now, verbose_name="کاربر ویژه تا: ")
 
+    def is_special_user(self):
+        if self.special_user > timezone.now():
+            return True
+        else:
+            return False
 # manager 
 class ArticleManager(models.Manager):
     def published(self):
@@ -42,7 +49,7 @@ class article(models.Model):
         ('D', 'Draft'),
         ('P', 'Published')
     )
-    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='articles', verbose_name='نویسنده')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL, related_name='articles', verbose_name='نویسنده')
     title = models.CharField(max_length=50, verbose_name="عنوان")
     slug = models.SlugField(max_length=100, unique=True, verbose_name="اسلاگ") #اون بخشی از url که تغییر میکنه رو میگیم اسلاگ 
     category = models.ManyToManyField(category, verbose_name="دسته بندی", related_name='articles')

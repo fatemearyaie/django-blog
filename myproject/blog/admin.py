@@ -1,5 +1,7 @@
 from django.contrib import admin
 from .models import article, category
+from .models import User
+from django.contrib.auth.admin import UserAdmin
 # CATEGORY
 def StatusTrue(modeladmin, request, queryset):
     row_update = queryset.update(status=True)
@@ -60,3 +62,5 @@ class articleadmin(admin.ModelAdmin):
 
     
 admin.site.register(article, articleadmin)
+
+admin.site.register(User, UserAdmin)
