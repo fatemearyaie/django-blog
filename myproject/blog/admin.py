@@ -2,6 +2,8 @@ from django.contrib import admin
 from .models import article, category
 from .models import User
 from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth import get_user_model
+
 # CATEGORY
 def StatusTrue(modeladmin, request, queryset):
     row_update = queryset.update(status=True)
@@ -61,6 +63,11 @@ class articleadmin(admin.ModelAdmin):
     actions = [make_published, make_draft]
 
     
-admin.site.register(article, articleadmin)
+User = get_user_model()
 
-admin.site.register(User, UserAdmin)
+@admin.register(User)
+class CustomUserAdmin(UserAdmin):
+    fieldsets = UserAdmin.fieldsets + (
+        ('فیلدهای خاص', {'fields': ('is_author', 'special_user')}),
+    )
+    list_display = UserAdmin.list_display + ('is_author', 'special_user')
