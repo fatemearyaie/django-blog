@@ -6,7 +6,7 @@ from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-
+from django.http import Http404
 
 # Create your views here.
 class ArticleList(ListView):
@@ -75,3 +75,14 @@ class ArticleCreate(LoginRequiredMixin, CreateView):
     fields = ['title', 'author', 'slug', 'category', 'description', 'thumbnail', 'publish', 'status']
     template_name = 'registeration/article-create-update.html'
     success_url = reverse_lazy('create')
+    
+    def get_form(self, form_class = None):
+        form = super().get_form(form_class)
+        if getattr(self.request.user, 'is_author', False):
+            for field in ['author', 'status']:
+                if field in form.fields:
+                    del form.fields[field]
+        elif not self.request.user.is_superuser:
+            raise Http404
+        return form
+
