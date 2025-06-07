@@ -61,6 +61,7 @@ class articleadmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':['title']}
     ordering = ['status', '-publish']
     actions = [make_published, make_draft]
+admin.site.register(article, articleadmin)
 
     
 User = get_user_model()
