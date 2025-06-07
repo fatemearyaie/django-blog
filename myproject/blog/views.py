@@ -73,3 +73,8 @@ class ArticleCreate(LoginRequiredMixin, CreateView):
     fields = ['title', 'author', 'slug', 'category', 'description', 'thumbnail', 'publish', 'status']
     template_name = 'registeration/article-create-update.html'
     success_url = reverse_lazy('create')
+
+    def form_valid(self, form):
+        self.object = form.save()
+        form = self.get_form_class()(initial={})
+        return render(self.request, self.template_name, {'form': form, 'success': True})
