@@ -15,5 +15,5 @@ urlpatterns = [
     path('account/login/', LoginView.as_view(template_name = 'registeration/login.html'),name='login'),
     path('accounts/profile/',paneladmin, name='profile'),
     path('account/list/', ArticleListAdmin.as_view(), name='articlelist'),
-    path('account/article/create', ArticleCreate.as_view(), name='create')
+    path('account/article/create', ArticleCreate.as_view(template_name = 'registeration/article-create-update.html'), name='create')
 ]
