@@ -138,3 +138,5 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 AUTH_USER_MODEL ='blog.User'
+
+BASE_DIR = Path(__file__).resolve().parent.parent
