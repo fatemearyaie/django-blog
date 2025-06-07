@@ -5,7 +5,7 @@ from django.core.paginator import Paginator
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.urls import reverse_lazy
 # Create your views here.
 class ArticleList(ListView):
     context_object_name = 'articles'
@@ -72,3 +72,4 @@ class ArticleCreate(LoginRequiredMixin, CreateView):
     model = article
     fields = ['title', 'author', 'slug', 'category', 'description', 'thumbnail', 'publish', 'status']
     template_name = 'registeration/article-create-update.html'
+    success_url = reverse_lazy('create')
