@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import about, contact, sample, ArticleList, ArticleDetail, CategoryList,AuthorList, paneladmin, ArticleListAdmin, ArticleCreate
+from .views import about, contact, sample, ArticleList, ArticleDetail, CategoryList,AuthorList,paneladmin, ArticleListAdmin, ArticleCreate,ArticleUpdate
 from django.contrib.auth.views import LoginView
 
 app_name = 'blog'
@@ -12,6 +12,7 @@ urlpatterns = [
     path('category/<slug:slug>/page/<int:page>/', CategoryList.as_view(), name='category'),
     path('author/<slug:username>/page/<int:page>/', AuthorList.as_view(), name='author'),
     path('account/login/', LoginView.as_view(template_name = 'registeration/login.html'),name='login'),
-    path('accounts/profile/',ArticleListAdmin.as_view(), name='profile'),
-    path('account/article/create/', ArticleCreate.as_view(), name='create')
+    path('account/profile/',ArticleListAdmin.as_view(), name='profile'),
+    path('account/article/create/', ArticleCreate.as_view(), name='create'),
+    path('account/article/update/<int:pk>/', ArticleUpdate.as_view(), name='update'),
 ]

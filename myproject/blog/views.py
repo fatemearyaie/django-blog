@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from .models import article, category
 from django.core.paginator import Paginator
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView,UpdateView
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -69,7 +69,7 @@ class AuthorList(ListView):
         context = super().get_context_data(**kwargs)
         context['author'] = self.author
         return context
-    
+
 class ArticleCreate(LoginRequiredMixin, CreateView):
     model = article
     fields = ['title', 'author', 'slug', 'category', 'description', 'thumbnail', 'publish', 'status']
@@ -86,3 +86,19 @@ class ArticleCreate(LoginRequiredMixin, CreateView):
             raise Http404
         return form
 
+class ArticleUpdate(LoginRequiredMixin, UpdateView):
+    model = article
+    fields = ['title', 'author', 'slug', 'category', 'description', 'thumbnail', 'publish', 'status']
+    template_name = 'registeration/article-create-update.html'
+    success_url = reverse_lazy('update')
+    
+    def get_form(self, form_class = None):
+        form = super().get_form(form_class)
+        if getattr(self.request.user, 'is_author', False):
+            for field in ['author', 'status']:
+                if field in form.fields:
+                    del form.fields[field]
+        elif not self.request.user.is_superuser:
+            raise Http404
+        return form
+    
