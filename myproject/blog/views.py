@@ -90,8 +90,17 @@ class ArticleUpdate(LoginRequiredMixin, UpdateView):
     model = article
     fields = ['title', 'author', 'slug', 'category', 'description', 'thumbnail', 'publish', 'status']
     template_name = 'registeration/article-create-update.html'
-    success_url = reverse_lazy('update')
+    success_url = reverse_lazy('profile')
     
+    def get_form(self, query_set=None):
+        obj = super().get_form(query_set)
+        if self.user.is_superuser:
+            return obj
+        elif getattr(self.request.user, 'is_author', False) and obj.author == self.request.user:
+            return obj
+        else:
+            raise Http404("شما اجازه ویرایش این مقاله را ندارید")
+        
     def get_form(self, form_class = None):
         form = super().get_form(form_class)
         if getattr(self.request.user, 'is_author', False):

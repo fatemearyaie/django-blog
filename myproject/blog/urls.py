@@ -11,8 +11,8 @@ urlpatterns = [
     path('contact/', contact, name='contact'),
     path('category/<slug:slug>/page/<int:page>/', CategoryList.as_view(), name='category'),
     path('author/<slug:username>/page/<int:page>/', AuthorList.as_view(), name='author'),
-    path('account/login/', LoginView.as_view(template_name = 'registeration/login.html'),name='login'),
-    path('account/profile/',ArticleListAdmin.as_view(), name='profile'),
-    path('account/article/create/', ArticleCreate.as_view(), name='create'),
-    path('account/article/update/<int:pk>/', ArticleUpdate.as_view(), name='update'),
+    path('accounts/login/', LoginView.as_view(template_name = 'registeration/login.html'),name='login'),
+    path('accounts/profile/',ArticleListAdmin.as_view(), name='profile'),
+    path('accounts/article/create/', ArticleCreate.as_view(), name='create'),
+    path('accounts/article/update/<int:pk>/', ArticleUpdate.as_view(), name='update'),
 ]

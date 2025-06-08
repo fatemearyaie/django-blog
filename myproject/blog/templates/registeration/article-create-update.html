@@ -22,7 +22,9 @@
             {{ form.title|as_crispy_field }}
         </div>
         <div class="col-6">
+        {% if form.author %}
             {{ form.author|as_crispy_field }}
+        {% endif %}
         </div>
     </div>
 
@@ -38,8 +40,9 @@
         </div>
         <div class="col-6">
             {{ form.thumbnail|as_crispy_field }}
+            {% if form.status %}
             {{ form.status|as_crispy_field }}
-
+            {% endif %}
         </div>
     </div>
 
