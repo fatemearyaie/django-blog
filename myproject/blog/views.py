@@ -114,5 +114,5 @@ class ArticleUpdate(LoginRequiredMixin, UpdateView):
 
 class ArticleDelete(LoginRequiredMixin, DeleteView):
     model = article
-    template_name = 'registeration/home.html'
+    template_name = 'registeration/delete.html'
     success_url = reverse_lazy('profile')
