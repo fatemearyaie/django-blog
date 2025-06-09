@@ -74,7 +74,7 @@ class ArticleCreate(LoginRequiredMixin, CreateView):
     model = article
     fields = ['title', 'author', 'slug', 'category', 'description', 'thumbnail', 'publish', 'status']
     template_name = 'registeration/article-create-update.html'
-    success_url = reverse_lazy('create')
+    success_url = reverse_lazy('blog:create')
     
     def get_form(self, form_class = None):
         form = super().get_form(form_class)
@@ -90,7 +90,7 @@ class ArticleUpdate(LoginRequiredMixin, UpdateView):
     model = article
     fields = ['title', 'author', 'slug', 'category', 'description', 'thumbnail', 'publish', 'status']
     template_name = 'registeration/article-create-update.html'
-    success_url = reverse_lazy('profile')
+    success_url = reverse_lazy('blog:profile')
     
     def get_form(self, query_set=None):
         obj = super().get_form(query_set)
@@ -115,4 +115,10 @@ class ArticleUpdate(LoginRequiredMixin, UpdateView):
 class ArticleDelete(LoginRequiredMixin, DeleteView):
     model = article
     template_name = 'registeration/delete.html'
-    success_url = reverse_lazy('profile')
+    success_url = reverse_lazy('blog:profile')
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        if self.request.user.is_superuser:
+            return qs
+        return qs.filter(author=self.request.user)
