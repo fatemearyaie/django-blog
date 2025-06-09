@@ -1,5 +1,14 @@
 from django.urls import path
-from .views import about, contact, sample, ArticleList, ArticleDetail, CategoryList,AuthorList,paneladmin, ArticleListAdmin, ArticleCreate,ArticleUpdate
+from .views import (about,
+                    contact,
+                    ArticleList,
+                    ArticleDetail,
+                    CategoryList,
+                    AuthorList,
+                    ArticleListAdmin,
+                    ArticleCreate,
+                    ArticleUpdate,
+                    ArticleDelete)
 from django.contrib.auth.views import LoginView
 
 app_name = 'blog'
@@ -15,4 +24,6 @@ urlpatterns = [
     path('accounts/profile/',ArticleListAdmin.as_view(), name='profile'),
     path('accounts/article/create/', ArticleCreate.as_view(), name='create'),
     path('accounts/article/update/<int:pk>/', ArticleUpdate.as_view(), name='update'),
+    path('accounts/delete/<int:pk>/', ArticleDelete.as_view(), name='delete'),
+
 ]

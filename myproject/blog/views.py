@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from .models import article, category
 from django.core.paginator import Paginator
-from django.views.generic import ListView, DetailView, CreateView,UpdateView
+from django.views.generic import ListView, DetailView, CreateView,UpdateView, DeleteView
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -111,3 +111,8 @@ class ArticleUpdate(LoginRequiredMixin, UpdateView):
             raise Http404
         return form
     
+
+class ArticleDelete(LoginRequiredMixin, DeleteView):
+    model = article
+    template_name = 'registeration/home.html'
+    success_url = reverse_lazy('profile')
