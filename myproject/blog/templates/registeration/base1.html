@@ -8,6 +8,8 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
   <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css'%}">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -47,6 +49,14 @@
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{% url 'blog:home' %}" class="nav-link"> خانه</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav mr-auto-navbav">
+
+      <li class="nav-item">
+        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </a>
       </li>
     </ul>
 
@@ -142,7 +152,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
-          <i class="fas fa-th-large"></i>
+          <i class="fas fa-sign-out-alt"></i>
         </a>
       </li>
     </ul>
