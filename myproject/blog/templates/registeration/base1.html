@@ -51,16 +51,6 @@
         <a href="{% url 'blog:home' %}" class="nav-link"> خانه</a>
       </li>
     </ul>
-    <ul class="navbar-nav mr-auto-navbav">
-
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
-          <i class="fa-solid fa-right-from-bracket"></i>
-        </a>
-      </li>
-    </ul>
-
-    <!-- SEARCH FORM -->
 
 
     <!-- Right navbar links -->
@@ -150,11 +140,14 @@
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
-          <i class="fas fa-sign-out-alt"></i>
-        </a>
-      </li>
+<li class="nav-item">
+  <form method="post" action="{% url 'blog:logout' %}" style="display: inline;">
+    {% csrf_token %}
+    <button type="submit" class="nav-link" style="background: none; border: none; padding: 0; color: inherit;">
+      <i class="fas fa-sign-out-alt"></i>
+    </button>
+  </form>
+</li>
     </ul>
   </nav>
   <!-- /.navbar -->

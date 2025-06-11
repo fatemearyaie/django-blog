@@ -9,7 +9,7 @@ from .views import (about,
                     ArticleCreate,
                     ArticleUpdate,
                     ArticleDelete)
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 
 app_name = 'blog'
 urlpatterns = [
@@ -25,5 +25,6 @@ urlpatterns = [
     path('accounts/article/create/', ArticleCreate.as_view(), name='create'),
     path('accounts/article/update/<int:pk>/', ArticleUpdate.as_view(), name='update'),
     path('accounts/delete/<int:pk>/', ArticleDelete.as_view(), name='delete'),
+    path('accounts/logout/', LogoutView.as_view(),name='logout'),
 
 ]
