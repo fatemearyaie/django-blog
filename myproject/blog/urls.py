@@ -13,7 +13,7 @@ from django.contrib.auth.views import LoginView
 
 app_name = 'blog'
 urlpatterns = [
-    path('/', ArticleList.as_view(), name='home'),
+    path('', ArticleList.as_view(), name='home'),
     path('page/<int:page>/', ArticleList.as_view(), name='home'),
     path('articles/<slug:slug>/',ArticleDetail.as_view(), name='post'), # <type:name>
     path('about/', about, name='about'),
