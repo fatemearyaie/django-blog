@@ -122,3 +122,5 @@ class ArticleDelete(LoginRequiredMixin, DeleteView):
         if self.request.user.is_superuser:
             return qs
         return qs.filter(author=self.request.user)
+    
+    

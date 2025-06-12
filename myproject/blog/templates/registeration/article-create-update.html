@@ -54,8 +54,10 @@
             {{ form.slug|as_crispy_field }}
         </div>
     </div>
-
     <button class="btn btn-success mt-3">ارسال مقاله</button>
+    {% if user.is_superuser %}
+    <a href="{% url 'blog:delete' object.pk %}" class="btn btn-danger mt-3">حذف</a>
+    {% endif %}
     </form>
 </div>
 
