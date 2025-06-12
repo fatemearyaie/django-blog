@@ -24,29 +24,51 @@
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            {% link request 'profile' 'لیست مقالات' %}
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                {% link request 'home' 'مقالات' %}
-                </a>
-              </li>
-              <li class="nav-item">
-              {% link request 'create' 'افزودن مقاله' %}
-              </li>
-          <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                پروفایل
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
-          </li>
-        </ul>
+<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+  
+  <!-- لیست مقالات (گروه‌بندی اصلی) -->
+  <li class="nav-item menu-open">
+    <a href="#" class="nav-link">
+      <i class="nav-icon fas fa-newspaper"></i>
+      <p>
+        لیست مقالات
+        <i class="right fas fa-angle-left"></i>
+      </p>
+    </a>
+    <ul class="nav nav-treeview">
+      
+      <!-- مقالات -->
+      <li class="nav-item">
+        <a href="{% url 'blog:home' %}" class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+          <i class="fas fa-list-alt nav-icon"></i>
+          <p>مقالات</p>
+        </a>
+      </li>
+
+      <!-- افزودن مقاله -->
+      <li class="nav-item">
+        <a href="{% url 'blog:create' %}" class="nav-link {% if request.resolver_match.url_name == 'create' %}active{% endif %}">
+          <i class="fas fa-plus-circle nav-icon"></i>
+          <p>افزودن مقاله</p>
+        </a>
+      </li>
+
+    </ul>
+  </li>
+
+  <!-- پروفایل -->
+  <li class="nav-item">
+    <a href="pages/widgets.html" class="nav-link">
+      <i class="nav-icon fas fa-user"></i>
+      <p>
+        پروفایل
+        <span class="right badge badge-danger">New</span>
+      </p>
+    </a>
+  </li>
+  
+</ul>
+
       </nav>
       <!-- /.sidebar-menu -->
     </div>
